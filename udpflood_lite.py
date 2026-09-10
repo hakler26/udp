@@ -42,7 +42,7 @@ if pitanje.lower() == "y":
 
     threads = []
 
-    for i in range(8):
+    for i in range(4):
         t = threading.Thread(target=sender)
         t.daemon = True
         t.start()
