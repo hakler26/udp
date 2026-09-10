@@ -25,7 +25,7 @@ os.system("clear")
 
 print CYAN + "UDP Flood - Termux Lite Verzija" + RESET
 print " "
-print "Koristi samo na " + RED + "ovlastenim mrezama!" + RESET
+print "Koristi samo na " + RED + "ovlaštenim mrežama!" + RESET
 print "Napravio  > " + RED + "HunteR_" + RESET
 
 ip = "192.168.1.1"
