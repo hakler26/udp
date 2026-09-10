@@ -37,6 +37,9 @@ if pitanje.lower() == "y":
     print " "
     print "Mreža se flooda velikim UDP datagramima, očekivan prestanak rada online servisa u jako kratkom vremenu."
     print " "
+
+    WIDTH = 50
+    
     text = "Veličina UDP datagrama - "
     value = "64.000B"
     print "||" + (text + value).center(WIDTH).replace(value, CYAN + value + WHITE) + "||"
